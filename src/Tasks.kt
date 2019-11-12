@@ -1,8 +1,27 @@
-class Tasks {
+import java.lang.Exception
 
-    fun printEnteredNumber() {
-        val number = readLine()!!
-        println("Вы ввели число $number")
+// NumberProvider
+
+interface NumberProvider {
+    fun getNumber(): Int
+}
+
+class UserInputNumberProvider: NumberProvider {
+    override fun getNumber(): Int {
+        return readLine()!!.toInt()
+    }
+}
+
+// Tasks
+
+class Tasks {
+    fun getMessageForNumber(numberProvider: NumberProvider): String {
+        return try {
+            val number = numberProvider.getNumber()
+            "Вы ввели число $number"
+        } catch (e: Exception) {
+            "Ошибка: вы ввели не число"
+        }
     }
 
     fun reverseNumber(number: Int) {
@@ -33,6 +52,5 @@ class Tasks {
         val sortedArray = negativeArray + positiveArray
         println(sortedArray.joinToString())
     }
-
 }
 
