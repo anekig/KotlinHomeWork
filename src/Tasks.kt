@@ -24,22 +24,26 @@ class Tasks {
         }
     }
 
-    fun reverseNumber(number: Int) {
-        val reversedNumber = number.toString().reversed().toInt()
-        println(reversedNumber)
-    }
-
-    fun printSeason(monthNumber: Int) {
-        when (monthNumber) {
-            1,2,12 -> println("Зима")
-            3,4,5 -> println("Весна")
-            6,7,8 -> println("Лето")
-            9,10,11 -> println("Осень")
-            else -> println("Неверный номер месяца")
+    fun reverseNumber(number: Any): String {
+        return try {
+            val reversedNumber = number.toString().reversed().toInt()
+            "Число наоборот: $reversedNumber"
+        } catch (e: Exception) {
+            "Ошибка: получено не число"
         }
     }
 
-    fun negativeSortArray(arrayOfNumbers: Array<Int>) {
+    fun getSeason(monthNumber: Int): String {
+        return when (monthNumber) {
+            1,2,12 -> "Зима"
+            3,4,5 -> "Весна"
+            6,7,8 -> "Лето"
+            9,10,11 -> "Осень"
+            else -> "Неверный номер месяца"
+        }
+    }
+
+    fun getSortedArrayFromNegative(arrayOfNumbers: Array<Int>): Array<Int> {
         var negativeArray = arrayOf<Int>()
         var positiveArray = arrayOf<Int>()
         for (number in arrayOfNumbers) {
@@ -49,8 +53,7 @@ class Tasks {
                 positiveArray += number
             }
         }
-        val sortedArray = negativeArray + positiveArray
-        println(sortedArray.joinToString())
+        return negativeArray + positiveArray
     }
 }
 
